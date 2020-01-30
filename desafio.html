@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Novo Item</h1>
+    <label for="nome">Nome:</label>
+    <input type="text" name="nome" id="nome">
+    <label for="quantidade">Quantidade:</label>
+    <input type="text" name="quantidade" id="quantidade">
+    <button onclick="adicionaItem(document.getElementById('nome').value, document.getElementById('quantidade').value)">Adicionar produto</button>
+    <br><br>
+
+    <table id="lista-nao-ordenada">
+        <tr>
+            <th>
+                Nome:
+            </th>
+            <th>
+                Quantidade:
+            </th>
+        </tr>
+
+
+    </table>
+
+</body>
+<script>
+    var produtos = [
+        {
+            nome: "Maçã",
+            quantidade: 25
+        },
+        {
+            nome: "Banana",
+            quantidade: 12
+        },
+        {
+            nome: "Cenoura",
+            quantidade: 13
+        }
+    ];
+
+    const lista = document.getElementById("lista-nao-ordenada");
+
+    function atualizaLista() {
+        var x = produtos.map((y) => {
+            let tr = document.createElement("tr");
+            let tdNome = document.createElement("td");
+            let tdQtd = document.createElement("td");
+            lista.append(tr);
+            tdNome.innerHTML = y.nome;
+            tr.append(tdNome);
+            tdQtd.innerHTML = y.quantidade;
+            tr.append(tdQtd);
+        })
+    }
+
+    function adicionaItem(nome_do_produto, quantidade) {
+        // Essa é uma feature do ES6 que usa o operador Spread e a técnica de Desestruturação, quais outras poderiam ser aplicadas no código inteiro?
+        // produtos.length = 0;
+        produtos = [
+            // ...produtos,
+            {
+                nome: nome_do_produto,
+                quantidade: quantidade
+            }
+        ];
+        atualizaLista();
+    }
+
+    atualizaLista();
+</script>
+
+</html>
